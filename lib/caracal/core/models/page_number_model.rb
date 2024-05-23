@@ -1,6 +1,5 @@
 require 'caracal/core/models/base_model'
 
-
 module Caracal
   module Core
     module Models
@@ -17,6 +16,7 @@ module Caracal
         # constants
         const_set(:DEFAULT_PAGE_NUMBER_ALIGN, :center)
         const_set(:DEFAULT_PAGE_NUMBER_SHOW,  false)
+        const_set(:DEFAULT_PAGE_NUMBER_COLOR, '000000')
 
         # accessors
         attr_reader :page_number_align
@@ -24,6 +24,8 @@ module Caracal
         attr_reader :page_number_label_size
         attr_reader :page_number_number_size
         attr_reader :page_number_show
+        attr_reader :page_number_label_color
+        attr_reader :page_number_number_color
 
         # initialization
         def initialize(options={}, &block)
@@ -32,6 +34,8 @@ module Caracal
           @page_number_label_size   = nil
           @page_number_number_size  = nil
           @page_number_show         = DEFAULT_PAGE_NUMBER_SHOW
+          @page_number_label_color  = DEFAULT_PAGE_NUMBER_COLOR
+          @page_number_number_color = DEFAULT_PAGE_NUMBER_COLOR
 
           super options, &block
         end
@@ -71,6 +75,14 @@ module Caracal
           @page_number_number_size = (v == 0) ? nil : v
         end
 
+        def label_color(value)
+          @page_number_label_color = value.to_s.strip
+        end
+
+        def number_color(value)
+          @page_number_number_color = value.to_s.strip
+        end
+
 
         #=============== VALIDATION ===========================
 
@@ -85,11 +97,9 @@ module Caracal
         private
 
         def option_keys
-          [:align, :label, :label_size, :number_size, :show]
+          [:align, :label, :label_size, :number_size, :show, :label_color, :number_color]
         end
-
       end
-
     end
   end
 end

@@ -26,6 +26,7 @@ module Caracal
         attr_reader :page_number_show
         attr_reader :page_number_label_color
         attr_reader :page_number_number_color
+        attr_reader :page_number_last_only
 
         # initialization
         def initialize(options={}, &block)
@@ -35,6 +36,7 @@ module Caracal
           @page_number_number_size = options.fetch(:number_size, nil)
           @page_number_show        = options.fetch(:show,        true)
           @page_number_color       = options.fetch(:color,       DEFAULT_PAGE_NUMBER_COLOR)
+          @page_number_last_only   = options.fetch(:last_only,   false)
 
           if block_given?
             instance_eval(&block)

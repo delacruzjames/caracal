@@ -26,6 +26,7 @@ module Caracal
           attr_reader :page_number_number_size
           attr_reader :page_number_show
           attr_reader :page_number_color
+          attr_reader :page_number_last_only
 
 
           #-------------------------------------------------------------
@@ -47,6 +48,7 @@ module Caracal
               @page_number_number_size  = model.page_number_number_size
               @page_number_show         = model.page_number_show
               @page_number_color         = model.page_number_color
+              @page_number_last_only    = model.page_number_last_only
             else
               raise Caracal::Errors::InvalidModelError, 'page_numbers :align parameter must be :left, :center, or :right'
             end

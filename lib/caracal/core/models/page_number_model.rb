@@ -29,13 +29,16 @@ module Caracal
 
         # initialization
         def initialize(options={}, &block)
-          @page_number_align        = DEFAULT_PAGE_NUMBER_ALIGN
-          @page_number_label        = nil
-          @page_number_label_size   = nil
-          @page_number_number_size  = nil
-          @page_number_show         = DEFAULT_PAGE_NUMBER_SHOW
-          @page_number_label_color  = DEFAULT_PAGE_NUMBER_COLOR
-          @page_number_number_color = DEFAULT_PAGE_NUMBER_COLOR
+          @page_number_align       = options.fetch(:align,       DEFAULT_PAGE_NUMBER_ALIGN)
+          @page_number_label       = options.fetch(:label,       nil)
+          @page_number_label_size  = options.fetch(:label_size,  nil)
+          @page_number_number_size = options.fetch(:number_size, nil)
+          @page_number_show        = options.fetch(:show,        true)
+          @page_number_color       = options.fetch(:color,       DEFAULT_PAGE_NUMBER_COLOR)
+
+          if block_given?
+            instance_eval(&block)
+          end
 
           super options, &block
         end
@@ -97,7 +100,7 @@ module Caracal
         private
 
         def option_keys
-          [:align, :label, :label_size, :number_size, :show, :label_color, :number_color]
+          [:align, :label, :label_size, :number_size, :show, :label_color, :color]
         end
       end
     end

@@ -26,6 +26,7 @@ module Caracal
         attr_reader :page_number_show
         attr_reader :page_number_label_color
         attr_reader :page_number_number_color
+        attr_reader :page_number_color
         attr_reader :page_number_last_only
 
         # initialization

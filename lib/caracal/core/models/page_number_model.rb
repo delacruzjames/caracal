@@ -89,6 +89,10 @@ module Caracal
           @page_number_number_color = value.to_s.strip
         end
 
+        def color(value)  # renamed from page_number_color
+          @page_number_color = value.to_s.strip
+        end
+
 
         #=============== VALIDATION ===========================
 
@@ -103,7 +107,7 @@ module Caracal
         private
 
         def option_keys
-          [:align, :label, :label_size, :number_size, :show, :label_color, :color]
+          [:align, :label, :label_size, :number_size, :show, :label_color, :color, :last_only]
         end
       end
     end

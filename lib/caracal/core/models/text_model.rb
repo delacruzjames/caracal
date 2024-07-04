@@ -1,6 +1,5 @@
 require 'caracal/core/models/base_model'
 
-
 module Caracal
   module Core
     module Models
@@ -27,6 +26,22 @@ module Caracal
         attr_reader :text_highlight_color
         attr_reader :text_vertical_align
 
+        # initialization
+        def initialize(options = {}, &block)
+          @text_content          = options.fetch(:content, nil)
+          @text_style            = options.fetch(:style, nil)
+          @text_font             = options.fetch(:font, nil)
+          @text_color            = options.fetch(:color, nil)
+          @text_size             = options.fetch(:size, nil)
+          @text_bold             = options.fetch(:bold, nil)
+          @text_italic           = options.fetch(:italic, nil)
+          @text_underline        = options.fetch(:underline, nil)
+          @text_bgcolor          = options.fetch(:bgcolor, nil)
+          @text_highlight_color  = options.fetch(:highlight_color, nil)
+          @text_vertical_align   = options.fetch(:vertical_align, nil)
+
+          super options, &block
+        end
 
 
         #--------------------------------------------------
@@ -56,29 +71,29 @@ module Caracal
 
         # booleans
         [:bold, :italic, :underline].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@text_#{ m }", !!value)
+          define_method "#{m}" do |value|
+            instance_variable_set("@text_#{m}", !!value)
           end
         end
 
         # integers
         [:size].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@text_#{ m }", value.to_i)
+          define_method "#{m}" do |value|
+            instance_variable_set("@text_#{m}", value.to_i)
           end
         end
 
         # strings
         [:bgcolor, :color, :content, :font, :highlight_color, :style].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@text_#{ m }", value.to_s)
+          define_method "#{m}" do |value|
+            instance_variable_set("@text_#{m}", value.to_s)
           end
         end
 
         # symbols
         [:vertical_align].each do |m|
-          define_method "#{ m }" do |value|
-            instance_variable_set("@text_#{ m }", value.to_s.to_sym)
+          define_method "#{m}" do |value|
+            instance_variable_set("@text_#{m}", value.to_s.to_sym)
           end
         end
 
@@ -87,7 +102,7 @@ module Caracal
 
         def valid?
           a = [:content]
-          a.map { |m| send("text_#{ m }") }.compact.size == a.size
+          a.map { |m| send("text_#{m}") }.compact.size == a.size
         end
 
 
@@ -103,7 +118,7 @@ module Caracal
         def method_missing(method, *args, &block)
           # I'm on the fence with respect to this implementation. We're ignoring
           # :method_missing errors to allow syntax flexibility for paragraph-type
-          # models.  The issue is the syntax format of those models--the way we pass
+          # models. The issue is the syntax format of those models--the way we pass
           # the content value as a special argument--coupled with the model's
           # ability to accept nested instructions.
           #

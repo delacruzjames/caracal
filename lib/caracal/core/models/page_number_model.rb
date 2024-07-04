@@ -17,6 +17,7 @@ module Caracal
         const_set(:DEFAULT_PAGE_NUMBER_ALIGN, :center)
         const_set(:DEFAULT_PAGE_NUMBER_SHOW,  false)
         const_set(:DEFAULT_PAGE_NUMBER_COLOR, '000000')
+        const_set(:DEFAULT_PAGE_NUMBER_TEXT_COLOR, '000000')  # default for text color
 
         # accessors
         attr_reader :page_number_align
@@ -27,6 +28,7 @@ module Caracal
         attr_reader :page_number_label_color
         attr_reader :page_number_number_color
         attr_reader :page_number_color
+        attr_reader :page_number_text_color   # new attribute for text color
         attr_reader :page_number_last_only
 
         # initialization
@@ -37,6 +39,7 @@ module Caracal
           @page_number_number_size = options.fetch(:number_size, nil)
           @page_number_show        = options.fetch(:show,        true)
           @page_number_color       = options.fetch(:color,       DEFAULT_PAGE_NUMBER_COLOR)
+          @page_number_text_color  = options.fetch(:text_color,  DEFAULT_PAGE_NUMBER_TEXT_COLOR)  # set default value for text color
           @page_number_last_only   = options.fetch(:last_only,   false)
 
           if block_given?
@@ -93,6 +96,10 @@ module Caracal
           @page_number_color = value.to_s.strip
         end
 
+        def text_color(value)  # new setter method for text color
+          @page_number_text_color = value.to_s.strip
+        end
+
 
         #=============== VALIDATION ===========================
 
@@ -107,7 +114,7 @@ module Caracal
         private
 
         def option_keys
-          [:align, :label, :label_size, :number_size, :show, :label_color, :color, :last_only]
+          [:align, :label, :label_size, :number_size, :show, :label_color, :color, :text_color, :last_only]
         end
       end
     end
